@@ -1,6 +1,6 @@
-package Tests;
+package tests;
 
-import Helpers.TestValues;
+import helpers.TestValues;
 import api.Specifications;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

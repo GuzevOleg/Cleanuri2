@@ -1,11 +1,11 @@
 package api;
 
-import pojo.ResultUrl;
-import pojo.Urls;
+import pojo.cleanUri.ResultUrl;
+import pojo.cleanUri.Urls;
 
 import static io.restassured.RestAssured.given;
 
-public class CleanUriApi extends Specifications  {
+public class CleanUriApi extends Specifications {
     public static ResultUrl sendUri(Urls url) {
         return given()
                 .when()

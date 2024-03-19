@@ -1,30 +1,31 @@
 package tests;
 
 import api.CleanUriApi;
+import endpoints.Endpoints;
 import helpers.TestValues;
 import api.Specifications;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pojo.ResultUrl;
-import pojo.Urls;
+import pojo.cleanUri.ResultUrl;
+import pojo.cleanUri.Urls;
 
-public class CleanUriTest {
+public class CleanUriTests {
 
     @Test
     @DisplayName("Тест на содержание базового url-адреса в результате")
-    public void checkResultContainsBaseUri() {
-        Specifications.installSpec(Specifications.reqSpec(), Specifications.repSpec(200));
+    public void checkResultContainsBaseUriTest() {
+        Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_CLEAN_URI, Endpoints.BASE_PATH_CLEAN_URI), Specifications.resSpec(200));
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(0);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
-        Assertions.assertTrue(resultUrl.getResultUrl().contains(Specifications.BASE_URL));
+        Assertions.assertTrue(resultUrl.getResultUrl().contains(Endpoints.BASE_URL_CLEAN_URI));
     }
 
     @Test
     @DisplayName("Тест на различие тестового url-адреса со сгенерированным")
-    public void checkUriNotEquals() {
-        Specifications.installSpec(Specifications.reqSpec(), Specifications.repSpec(200));
+    public void checkUriNotEqualsTest() {
+        Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_CLEAN_URI, Endpoints.BASE_PATH_CLEAN_URI), Specifications.resSpec(200));
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(1);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
@@ -33,8 +34,8 @@ public class CleanUriTest {
 
     @Test
     @DisplayName("Тест невалидного url-адреса")
-    public void checkNotValidUri() {
-        Specifications.installSpec(Specifications.reqSpec(), Specifications.repSpec(400));
+    public void checkNotValidUriTest() {
+        Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_CLEAN_URI, Endpoints.BASE_PATH_CLEAN_URI), Specifications.resSpec(400));
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(2);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
@@ -43,8 +44,8 @@ public class CleanUriTest {
 
     @Test
     @DisplayName("Проверка url-адреса без строки https")
-    public void checkUriNotHttp() {
-        Specifications.installSpec(Specifications.reqSpec(), Specifications.repSpec(400));
+    public void checkUriNotHttpTest() {
+        Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_CLEAN_URI, Endpoints.BASE_PATH_CLEAN_URI), Specifications.resSpec(400));
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(3);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
@@ -53,8 +54,8 @@ public class CleanUriTest {
 
     @Test
     @DisplayName("Тест с пустым значением")
-    public void checkIsEmptyUri() {
-        Specifications.installSpec(Specifications.reqSpec(), Specifications.repSpec(400));
+    public void checkIsEmptyUriTest() {
+        Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_CLEAN_URI, Endpoints.BASE_PATH_CLEAN_URI), Specifications.resSpec(400));
         Urls urls = new Urls("");
         ResultUrl resultUrl = CleanUriApi.sendUri(urls);
         Assertions.assertEquals("API Error: After sanitization URL is empty", resultUrl.getError());

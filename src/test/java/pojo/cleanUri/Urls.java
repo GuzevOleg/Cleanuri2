@@ -1,4 +1,4 @@
-package pojo;
+package pojo.cleanUri;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

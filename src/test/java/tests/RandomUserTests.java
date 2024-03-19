@@ -33,7 +33,7 @@ public class RandomUserTests {
     @ParameterizedTest
     @MethodSource("helpers.TestValues#isNatTestData")
     @DisplayName("Все пользователи одной нации")
-    public void generateUserNatCATest(String nat) {
+    public void generateUserNatTest(String nat) {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri("nat", nat, "results", 200);
         List<Result> result = randomUsersResult.getResults();

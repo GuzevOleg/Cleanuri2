@@ -6,29 +6,38 @@ import endpoints.Endpoints;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import pojo.randomUser.RandomUsersResult;
 import pojo.randomUser.Result;
 
 import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class RandomUserTests {
-    @Test
-    @DisplayName("Все пользователи female")
-    public void generateUserGenderFemaleTest() {
+
+    @ParameterizedTest
+    @MethodSource("helpers.TestValues#isGenderTestData")
+    @DisplayName("Все пользователи female/male")
+    public void generateUserGenderTest(String gender) {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
-        RandomUsersResult randomUsersResult = RandomUserApi.sendUri("gender", "female", "results", 100);
+        RandomUsersResult randomUsersResult = RandomUserApi.sendUri("gender", gender, "results", 100);
         List<Result> result = randomUsersResult.getResults();
-        result.stream().forEach(x -> Assertions.assertEquals("female", x.getGender()));
+        result.stream().forEach(x -> Assertions.assertEquals(gender, x.getGender()));
         Assertions.assertEquals(100, result.stream().count());
     }
 
-    @Test
-    @DisplayName("Все пользователи из CA")
-    public void generateUserNatCATest() {
+    @ParameterizedTest
+    @MethodSource("helpers.TestValues#isNatTestData")
+    @DisplayName("Все пользователи одной нации")
+    public void generateUserNatCATest(String nat) {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
-        RandomUsersResult randomUsersResult = RandomUserApi.sendUri("nat", "CA", "results", 200);
+        RandomUsersResult randomUsersResult = RandomUserApi.sendUri("nat", nat, "results", 200);
         List<Result> result = randomUsersResult.getResults();
-        result.stream().forEach(x -> Assertions.assertEquals("CA", x.getNat()));
+        result.stream().forEach(x -> Assertions.assertEquals(nat, x.getNat()));
         Assertions.assertEquals(200, result.stream().count());
     }
 

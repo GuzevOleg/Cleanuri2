@@ -1,10 +1,15 @@
 package helpers;
 
+import org.junit.jupiter.params.provider.Arguments;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class TestValues {
     private List<String> list;
@@ -24,5 +29,20 @@ public class TestValues {
 
     public List<String> getList() {
         return list;
+    }
+    public static Stream<Arguments> isGenderTestData() {
+        return Stream.of(
+                arguments("male"),
+                arguments("female")
+        );
+    }
+    public static Stream<Arguments> isNatTestData() {
+        return Stream.of(
+                arguments("US"),
+                arguments("TR"),
+                arguments("FR"),
+                arguments("GB"),
+                arguments("UA")
+        );
     }
 }

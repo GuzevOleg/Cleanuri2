@@ -3,7 +3,6 @@ package tests;
 import api.RandomUserApi;
 import api.Specifications;
 import endpoints.Endpoints;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +11,8 @@ import pojo.randomUser.RandomUsersResult;
 import pojo.randomUser.Result;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class RandomUserTests {
@@ -23,8 +24,8 @@ public class RandomUserTests {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri("gender", gender, "results", 100);
         List<Result> result = randomUsersResult.getResults();
-        result.stream().forEach(x -> Assertions.assertEquals(gender, x.getGender()));
-        Assertions.assertEquals(100, result.stream().count());
+        result.stream().forEach(x -> assertEquals(gender, x.getGender()));
+        assertEquals(100, result.stream().count());
     }
 
     @ParameterizedTest
@@ -34,8 +35,8 @@ public class RandomUserTests {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri("nat", nat, "results", 200);
         List<Result> result = randomUsersResult.getResults();
-        result.stream().forEach(x -> Assertions.assertEquals(nat, x.getNat()));
-        Assertions.assertEquals(200, result.stream().count());
+        result.stream().forEach(x -> assertEquals(nat, x.getNat()));
+        assertEquals(200, result.stream().count());
     }
 
     @Test
@@ -44,7 +45,7 @@ public class RandomUserTests {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri("password", "special,32", "results", 100);
         List<Result> result = randomUsersResult.getResults();
-        result.stream().forEach(x -> Assertions.assertEquals(32, x.getLogin().getPassword().length()));
+        result.stream().forEach(x -> assertEquals(32, x.getLogin().getPassword().length()));
     }
 
     @Test
@@ -52,7 +53,7 @@ public class RandomUserTests {
     public void generateUserWithoutParamsTest() {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri();
-        Assertions.assertNotNull(randomUsersResult);
+        assertNotNull(randomUsersResult);
     }
 
     @Test
@@ -60,7 +61,7 @@ public class RandomUserTests {
     public void checkVersionInfoTest() {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri("1.3");
-        Assertions.assertEquals(randomUsersResult.getInfo().getVersion(), "1.3");
+        assertEquals(randomUsersResult.getInfo().getVersion(), "1.3");
     }
 
     @Test
@@ -69,6 +70,6 @@ public class RandomUserTests {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
         RandomUsersResult randomUsersResult = RandomUserApi.sendUri("gender", "female", "results", 5001);
         List<Result> result = randomUsersResult.getResults();
-        Assertions.assertNotEquals(5001, result.stream().count());
+        assertNotEquals(5001, result.stream().count());
     }
 }

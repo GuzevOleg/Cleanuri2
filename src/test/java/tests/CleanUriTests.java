@@ -4,11 +4,12 @@ import api.CleanUriApi;
 import endpoints.Endpoints;
 import helpers.TestValues;
 import api.Specifications;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.cleanUri.ResultUrl;
 import pojo.cleanUri.Urls;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CleanUriTests {
 
@@ -19,7 +20,7 @@ public class CleanUriTests {
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(0);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
-        Assertions.assertTrue(resultUrl.getResultUrl().contains(Endpoints.BASE_URL_CLEAN_URI));
+        assertTrue(resultUrl.getResultUrl().contains(Endpoints.BASE_URL_CLEAN_URI));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class CleanUriTests {
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(1);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
-        Assertions.assertNotEquals(testValue, resultUrl.getResultUrl());
+        assertNotEquals(testValue, resultUrl.getResultUrl());
     }
 
     @Test
@@ -39,7 +40,7 @@ public class CleanUriTests {
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(2);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
-        Assertions.assertEquals("API Error: URL is invalid (check #1)", resultUrl.getError());
+        assertEquals("API Error: URL is invalid (check #1)", resultUrl.getError());
     }
 
     @Test
@@ -49,7 +50,7 @@ public class CleanUriTests {
         TestValues testValues = new TestValues();
         String testValue = testValues.getList().get(3);
         ResultUrl resultUrl = CleanUriApi.sendUri(new Urls(testValue));
-        Assertions.assertEquals("API Error: URL is invalid (check #1)", resultUrl.getError());
+        assertEquals("API Error: URL is invalid (check #1)", resultUrl.getError());
     }
 
     @Test
@@ -58,7 +59,7 @@ public class CleanUriTests {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_CLEAN_URI, Endpoints.BASE_PATH_CLEAN_URI), Specifications.resSpec(400));
         Urls urls = new Urls("");
         ResultUrl resultUrl = CleanUriApi.sendUri(urls);
-        Assertions.assertEquals("API Error: After sanitization URL is empty", resultUrl.getError());
-        Assertions.assertTrue(urls.getUrl().isEmpty());
+        assertEquals("API Error: After sanitization URL is empty", resultUrl.getError());
+        assertTrue(urls.getUrl().isEmpty());
     }
 }

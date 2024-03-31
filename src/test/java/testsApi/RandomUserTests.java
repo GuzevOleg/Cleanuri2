@@ -1,4 +1,4 @@
-package tests;
+package testsApi;
 
 import api.RandomUserApi;
 import api.Specifications;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RandomUserTests {
 
     @ParameterizedTest
-    @MethodSource("helpers.TestValues#isGenderTestData")
+    @MethodSource("helpers.TestValuesApi#isGenderTestData")
     @DisplayName("Все пользователи female/male")
     public void generateUserGenderTest(String gender) {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));
@@ -29,7 +29,7 @@ public class RandomUserTests {
     }
 
     @ParameterizedTest
-    @MethodSource("helpers.TestValues#isNatTestData")
+    @MethodSource("helpers.TestValuesApi#isNatTestData")
     @DisplayName("Все пользователи одной нации")
     public void generateUserNatTest(String nat) {
         Specifications.installSpecCleanUri(Specifications.reqSpec(Endpoints.BASE_URL_RANDOM_USER, Endpoints.BASE_PATH_RANDOM_USER), Specifications.resSpec(200));

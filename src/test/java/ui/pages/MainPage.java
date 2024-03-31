@@ -2,12 +2,14 @@ package ui.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 import org.openqa.selenium.Keys;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Selenide.*;
 
+@Getter
 public class MainPage {
     private SelenideElement firstNameElement = $("#firstName");
     private SelenideElement lastNameElement = $("#lastName");
@@ -79,6 +81,7 @@ public class MainPage {
         pictureElement.sendKeys(file.getAbsolutePath());
         return this;
     }
+
     public SubmittingForm openSubmittingForm() {
         buttonSubmit.click();
         return new SubmittingForm();

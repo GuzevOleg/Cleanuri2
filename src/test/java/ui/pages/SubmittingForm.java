@@ -21,6 +21,7 @@ public class SubmittingForm {
     public SelenideElement getSubmittingForm() {
         return submittingForm;
     }
+
     public String getStudentName() {
         return studentName.getText();
     }

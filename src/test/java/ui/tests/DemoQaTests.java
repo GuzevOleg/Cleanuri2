@@ -73,11 +73,29 @@ public class DemoQaTests extends BaseTest {
         assertFalse(submittingForm.getSubmittingForm().isDisplayed());
     }
 
+    @ParameterizedTest
+    @MethodSource("helpers.TestValuesUi#isDemoQaTestDataNotValid")
+    @DisplayName("Заполнение полей у формы невалидными значениями")
+    public void fillingFormIsNegative1(String firstName, String lastName, String email, String gender, String mobile, String date, String address, String subject, String hobbies, String state, String city) {
+        SubmittingForm submittingForm = new MainPage()
+                .enterInfoPerson(firstName, lastName, email, gender, mobile, date, address)
+                .enterSubjects(subject)
+                .enterHobbies(hobbies)
+                .enterState(state)
+                .enterCity(city)
+                .enterPicture()
+                .openSubmittingForm();
+        assertFalse(submittingForm.getSubmittingForm().isDisplayed());
+    }
+
     @Test
     @DisplayName("Заполнение формы пустыми значениями")
     public void fillingFormWithEmptyValues() {
-        SubmittingForm submittingForm = new MainPage()
-                .openSubmittingForm();
+        MainPage mainPage = new MainPage();
+        SubmittingForm submittingForm = new SubmittingForm();
         assertFalse(submittingForm.getSubmittingForm().isDisplayed());
+        assertEquals("rgba(255, 255, 255, 1)", mainPage.getLastNameElement().getCssValue("background-color"));
+        assertEquals("rgba(255, 255, 255, 1)", mainPage.getFirstNameElement().getCssValue("background-color"));
+        assertEquals("rgba(255, 255, 255, 1)", mainPage.getUserMobileElement().getCssValue("background-color"));
     }
 }

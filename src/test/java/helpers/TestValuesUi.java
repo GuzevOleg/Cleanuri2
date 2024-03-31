@@ -32,5 +32,4 @@ public class TestValuesUi {
                 arguments("Max", "Petrovich", "qweqwe", "Other", "9626226648", "04 February,2024", "12asd3 Tankasdasdas 12312", "Maths", "Sports", "NCR", "Noida") //Email не по маске
         );
     }
-
 }

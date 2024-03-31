@@ -60,6 +60,4 @@ public class SubmittingForm {
     public String getStateAndCity() {
         return stateAndCity.getText();
     }
-
-
 }

@@ -50,12 +50,12 @@ public class DemoQaTests extends BaseTest {
         assertEquals(gender, submittingForm.getGender());
         assertEquals(mobile, submittingForm.getMobile());
         assertNotNull(submittingForm.getDateOfBirth());
-        assertNull(submittingForm.getAddress());
-        assertNull(submittingForm.getHobbies());
-        assertNull(submittingForm.getStateAndCity());
-        assertNull(submittingForm.getSubjects());
-        assertNull(submittingForm.getStudentEmail());
-        assertNull(submittingForm.getPicture());
+        assertTrue(submittingForm.getAddress().isEmpty());
+        assertTrue(submittingForm.getHobbies().isEmpty());
+        assertTrue(submittingForm.getStateAndCity().isEmpty());
+        assertTrue(submittingForm.getSubjects().isEmpty());
+        assertTrue(submittingForm.getStudentEmail().isEmpty());
+        assertTrue(submittingForm.getPicture().isEmpty());
     }
 
     @ParameterizedTest

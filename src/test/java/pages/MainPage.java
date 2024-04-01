@@ -1,7 +1,8 @@
-package ui.pages;
+package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import endpoints.Endpoints;
 import lombok.Getter;
 import org.openqa.selenium.Keys;
 
@@ -29,7 +30,7 @@ public class MainPage {
     private ElementsCollection menuStateElement = $$(".css-11unzgr > div");
 
     public MainPage() {
-        open("https://demoqa.com/automation-practice-form");
+        open(Endpoints.BASE_URL_DEMO_QA);
     }
 
     public MainPage enterInfoPerson(String firstName, String lastName, String email, String gender, String mobile, String dateOfBirth, String address) {

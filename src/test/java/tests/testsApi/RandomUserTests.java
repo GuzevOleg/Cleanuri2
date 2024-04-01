@@ -1,7 +1,7 @@
-package testsApi;
+package tests.testsApi;
 
-import api.RandomUserApi;
-import api.Specifications;
+import controllers.RandomUserApi;
+import controllers.Specifications;
 import endpoints.Endpoints;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

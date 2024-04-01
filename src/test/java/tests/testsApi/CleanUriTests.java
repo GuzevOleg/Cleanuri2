@@ -1,9 +1,9 @@
-package testsApi;
+package tests.testsApi;
 
-import api.CleanUriApi;
+import controllers.CleanUriApi;
 import endpoints.Endpoints;
 import helpers.TestValuesApi;
-import api.Specifications;
+import controllers.Specifications;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.cleanUri.ResultUrl;
